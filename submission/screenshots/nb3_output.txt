@@ -1,0 +1,42 @@
+--- Cell 3 ---
+/tmp/ipykernel_180620/2395657552.py:5: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient
+
+--- Cell 3 ---
+/home/nguyen-xuan-quan/vinai/labs/Track2-Day19-2A202601976-NguyenXuanQuan/.venv/lib/python3.14/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+
+--- Cell 3 ---
+Building Searcher (embeds 1000 docs, may take ~5 min on CPU)...
+
+--- Cell 3 ---
+Searcher ready in 200.0s
+healthz: {'ready': True, 'n_docs': 1000}
+
+--- Cell 5 ---
+latency_ms: 34.7
+top-3 hits:
+       cloud_016  score=0.0325  Điện toán đám mây: tự động mở rộng theo lưu lượng
+       cloud_072  score=0.0323  Điện toán đám mây: tự động mở rộng theo lưu lượng
+       cloud_053  score=0.0315  Điện toán đám mây: tự động mở rộng theo lưu lượng
+
+--- Cell 7 ---
+Running warmup (10 queries each mode)...
+
+--- Cell 7 ---
+Warmup done.
+  mode            P50      P95      P99  P99(wall)
+  keyword       0.9ms    1.3ms    2.1ms      3.2ms
+
+--- Cell 7 ---
+  semantic      1.0ms   43.3ms   50.4ms     51.5ms
+
+--- Cell 7 ---
+  hybrid        2.5ms    3.1ms    3.4ms      4.4ms
+
+--- Cell 9 ---
+Hybrid P99 server-side: 3.4ms
+PASS — hybrid P99 < 50ms (3.4ms)
+
+--- Cell 11 ---
+API TestClient closed

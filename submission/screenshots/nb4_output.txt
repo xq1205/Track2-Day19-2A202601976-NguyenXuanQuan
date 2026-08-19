@@ -1,0 +1,147 @@
+--- Cell 3 ---
+Wrote 3 Parquet sources to /home/nguyen-xuan-quan/vinai/labs/Track2-Day19-2A202601976-NguyenXuanQuan/app/feast_repo/data
+  item_popularity.parquet  9.7 KB
+  query_velocity.parquet  2.3 KB
+  user_profile.parquet  2.8 KB
+
+--- Cell 5 ---
+STDOUT:
+No project found in the repository. Using project name lab19 defined in feature_store.yaml
+Applying changes for project lab19
+Updated feature view item_popularity_features
+	batch_source: type: BATCH_FILE
+timestamp_field: "event_timestamp"
+file_options {
+  uri: "/home/nguyen-xuan-quan/vinai/labs/Track2-Day19-2A202601976-NguyenXuanQuan/app/feast_repo/data/item_popularity.parquet"
+}
+data_source_class_type: "feast.infra.offline_stores.file_source.FileSource"
+name: "item_popularity_source"
+meta {
+  created_timestamp {
+    seconds: 1787130059
+    nanos: 802651000
+  }
+  last_updated_timestamp {
+    seconds: 1787130059
+    nanos: 868314000
+  }
+}
+ -> type: BATCH_FILE
+timestamp_field: "event_timestamp"
+file_options {
+  uri: "/home/nguyen-xuan-quan/vinai/labs/Track2-Day19-2A202601976-NguyenXuanQuan/app/feast_repo/data/item_popularity.parquet"
+}
+data_source_class_type: "feast.infra.offline_stores.file_source.FileSource"
+name: "item_popularity_source"
+meta {
+  created_timestamp {
+    seconds: 1787130517
+    nanos: 618051000
+  }
+  last_updated_timestamp {
+    seconds: 1787130517
+    nanos: 618051000
+  }
+}
+
+Updated feature view query_velocity_features
+	batch_source: type: BATCH_FILE
+timestamp_field: "event_timestamp"
+file_options {
+  uri: "/home/nguyen-xuan-quan/vinai/labs/Track2-Day19-2A202601976-NguyenXuanQuan/app/feast_repo/data/query_velocity.parquet"
+}
+data_source_class_type: "feast.infra.offline_stores.file_source.FileSource"
+name: "query_velocity_source"
+meta {
+  created_timestamp {
+    seconds: 1787130059
+    nanos: 802717000
+  }
+  last_updated_timestamp {
+    seconds: 1787130059
+    nanos: 867981000
+  }
+}
+ -> type: BATCH_FILE
+timestamp_field: "event_timestamp"
+file_options {
+  uri: "/home/nguyen-xuan-quan/vinai/labs/Track2-Day19-2A202601976-NguyenXuanQuan/app/feast_repo/data/query_velocity.parquet"
+}
+data_source_class_type: "feast.infra.offline_stores.file_source.FileSource"
+name: "query_velocity_source"
+meta {
+  created_timestamp {
+    seconds: 1787130517
+    nanos: 618120000
+  }
+  last_updated_timestamp {
+    seconds: 1787130517
+    nanos: 618120000
+  }
+}
+
+Updated feature view user_profile_features
+	batch_source: type: BATCH_FILE
+timestamp_field: "event_timestamp"
+file_options {
+  uri: "/home/nguyen-xuan-quan/vinai/labs/Track2-Day19-2A202601976-NguyenXuanQuan/app/feast_repo/data/user_profile.parquet"
+}
+data_source_class_type: "feast.infra.offline_stores.file_source.FileSource"
+name: "user_profile_source"
+meta {
+  created_timestamp {
+    seconds: 1787130059
+    nanos: 802574000
+  }
+  last_updated_timestamp {
+    seconds: 1787130059
+    nanos: 868523000
+  }
+}
+ -> type: BATCH_FILE
+timestamp_field: "event_timestamp"
+file_options {
+  uri: "/home/nguyen-xuan-quan/vinai/labs/Track2-Day19-2A202601976-NguyenXuanQuan/app/feast_repo/data/user_profile.parquet"
+}
+data_source_class_type: "feast.infra.offline_stores.file_source.FileSource"
+name: "user_profile_source"
+meta {
+  created_timestamp {
+    seconds: 1787130517
+    nanos: 617973000
+  }
+  last_updated_timestamp {
+    seconds: 1787130517
+    nanos: 617973000
+  }
+}
+
+
+No changes to infrastructure
+
+
+--- Cell 7 ---
+Materializing [1m[32m3[0m feature views to [1m[32m2026-08-19 09:08:35+00:00[0m into the [1m[32msqlite[0m online store.
+
+[1m[32muser_profile_features[0m from [1m[32m2026-08-19 09:00:56+00:00[0m to [1m[32m2026-08-19 09:08:35+00:00[0m:
+[1m[32mitem_popularity_features[0m from [1m[32m2026-08-19 09:00:56+00:00[0m to [1m[32m2026-08-19 09:08:35+00:00[0m:
+[1m[32mquery_velocity_features[0m from [1m[32m2026-08-19 09:00:56+00:00[0m to [1m[32m2026-08-19 09:08:35+00:00[0m:
+
+
+--- Cell 9 ---
+Single lookup: 6.51ms
+{'user_id': 'u_001', 'reading_speed_wpm': 187, 'topic_affinity': 'cloud', 'preferred_language': 'vi', 'queries_last_hour': 11, 'distinct_topics_24h': 4}
+
+--- Cell 11 ---
+Online lookup latency over 100 calls:
+  P50 = 0.12ms
+  P95 = 0.14ms
+  P99 = 0.48ms
+PASS — online lookup P99 < 10ms (0.48ms)
+
+--- Cell 13 ---
+PIT join result (3 rows × 4 features):
+  user_id           event_timestamp  reading_speed_wpm topic_affinity
+0   u_003 2026-08-19 09:08:35+00:00                201       database
+1   u_002 2026-08-19 09:08:35+00:00                194       security
+2   u_001 2026-08-19 09:08:35+00:00                187          cloud

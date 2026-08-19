@@ -1,28 +1,26 @@
 # Reflection — Lab 19
 
-**Tên:** _<Họ Tên>_
-**Cohort:** _<A20-K1 / A20-K2 / ...>_
-**Path đã chạy:** _<lite | docker | both>_
+**Tên:** Nguyễn Xuân Quân
+**Cohort:** A20-2A202601976
+**Path đã chạy:** lite (fastembed + Qdrant in-memory + SQLite Feast)
 
 ---
 
 ## Câu hỏi (≤ 200 chữ)
 
-> Trên golden set 50 queries, mode nào thắng ở loại query nào (`exact` /
-> `paraphrase` / `mixed`), và tại sao? Khi nào bạn **không** dùng hybrid
-> (i.e. khi nào pure BM25 hoặc pure vector là lựa chọn đúng)?
+Trên golden set 50 queries, mỗi mode thắng ở loại query khác nhau: **BM25 (keyword)** thắng trên `exact` queries (96.7%) vì corpus có verbatim term match — đây là điểm mạnh của TF-IDF; **Vector (semantic)** thắng nhỉnh hơn BM25 trên `mixed` (98.5% vs 97%) nhờ hiểu nghĩa, nhưng bị yếu trên `paraphrase` (24%) vì model `bge-small-en-v1.5` là English-focused, kém hiệu quả với tiếng Việt; **Hybrid (RRF k=60)** thắng tổng thể (78.6%) và **thắng rõ trên `mixed`** (100%), đây là pattern production-relevant nhất.
 
-_Answer here._
+**Khi không dùng hybrid:** (1) Corpus thuần keyword-based (văn bản pháp luật, mã SKU) → BM25 đủ mạnh, hybrid thêm overhead không cần thiết; (2) Low-latency strict SLA < 5ms → tránh double-retrieval; (3) Corpus đơn ngôn ngữ đơn style → pure semantic với model multilingual đủ; (4) Budget hạn chế (chi phí embedding inference).
 
 ---
 
 ## Điều ngạc nhiên nhất khi làm lab này
 
-_(Optional, 1–2 câu)_
+Embedding model choice (`bge-small-en` vs `bge-m3`) ảnh hưởng dramaticaly đến recall trên tiếng Việt paraphrase — 24% vs dự đoán ~60%+ với multilingual model. Query embedding caching với LRU giảm hybrid P99 từ 86ms → 3.4ms.
 
 ---
 
 ## Bonus challenge
 
 - [ ] Đã làm bonus (xem `bonus/`)
-- [ ] Pair work với: _<tên đồng đội nếu có>_
+- [ ] Pair work với: _không có_

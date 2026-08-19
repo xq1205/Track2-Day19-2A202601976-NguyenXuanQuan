@@ -183,9 +183,12 @@ else:
 
 # %%
 import pandas as pd
+# PIT join: entity timestamp must be >= feature event_timestamp for the row to be returned.
+# u_000 (i=0): feature at NOW-0h, u_001 (i=1): feature at NOW-1h, u_002 (i=2): feature at NOW-2h
+# We query at NOW so all 3 feature rows are in the past → all 3 should return.
 entity_df = pd.DataFrame({
     "user_id": ["u_001", "u_002", "u_003"],
-    "event_timestamp": [NOW - timedelta(hours=2), NOW - timedelta(hours=1), NOW],
+    "event_timestamp": [NOW, NOW, NOW],
 })
 
 historical = fs.get_historical_features(
@@ -195,6 +198,7 @@ historical = fs.get_historical_features(
         "user_profile_features:topic_affinity",
     ],
 ).to_df()
+print(f"PIT join result ({len(historical)} rows × {len(historical.columns)} features):")
 print(historical)
 
 # %% [markdown]
